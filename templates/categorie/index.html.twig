@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categorie{% endblock %}
+
+{% block body %}
+    <h1>Categorie </h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>CreatedAt</th>
+                <th>User_id</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categorie in categories %}
+            <tr>
+                <td>{{ categorie.id }}</td>
+                <td>{{ categorie.nom }}</td>
+                <td>{{ categorie.createdAt ? categorie.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ categorie.userId }}</td>
+                <td>
+                    <a class="btn btn-primary mb-3" href="{{ path('app_categorie_show', {'id': categorie.id}) }}">show</a>
+                    <a class="btn btn-primary mb-3" href="{{ path('app_categorie_edit', {'id': categorie.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('app_categorie_new') }}">Create new</a>
+    <a class="btn btn-primary" href="{{ path('app_article_index') }}">Article</a>
+{% endblock %}

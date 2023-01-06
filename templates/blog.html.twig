@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+ 
+{% block body %}
+<form method="post" >
+
+
+    {% if app.user %}
+        <div class="mb-3">
+           Bonjour {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+    <a class="btn btn-primary btn-lg" href="{{ path('admin')}}" role="button">Admin</a>
+    
+    <h1 class="h3 mb-3 font-weight-normal">Le Blog</h1>
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+    >
+</form>
+
+
+{% endblock %}

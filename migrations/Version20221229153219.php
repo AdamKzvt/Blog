@@ -1,0 +1,51 @@
+<?php
+
+declare(strict_types=1);
+
+namespace DoctrineMigrations;
+
+use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\AbstractMigration;
+
+/**
+ * Auto-generated Migration: Please modify to your needs!
+ */
+final class Version20221229153219 extends AbstractMigration
+{
+    public function getDescription(): string
+    {
+        return '';
+    }
+
+    public function up(Schema $schema): void
+    {
+        // this up() migration is auto-generated, please modify it to your needs
+        // $this->addSql('DROP TABLE messenger_messages');
+        // $this->addSql('DROP INDEX user_id ON article');
+        // $this->addSql('DROP INDEX categorie_id ON article');
+        // $this->addSql('ALTER TABLE categorie DROP FOREIGN KEY categorie_ibfk_1');
+        // $this->addSql('ALTER TABLE categorie DROP FOREIGN KEY categorie_ibfk_2');
+        // $this->addSql('DROP INDEX user_id ON categorie');
+        // $this->addSql('ALTER TABLE categorie ADD nom_user VARCHAR(255) NOT NULL, DROP user_id');
+        // $this->addSql('ALTER TABLE commentaire DROP FOREIGN KEY commentaire_ibfk_2');
+        // $this->addSql('ALTER TABLE commentaire DROP FOREIGN KEY commentaire_ibfk_1');
+        // $this->addSql('DROP INDEX user_id ON commentaire');
+        // $this->addSql('DROP INDEX article_id ON commentaire');
+    }
+
+    public function down(Schema $schema): void
+    {
+        // this down() migration is auto-generated, please modify it to your needs
+        $this->addSql('CREATE TABLE messenger_messages (id BIGINT AUTO_INCREMENT NOT NULL, body LONGTEXT CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`, headers LONGTEXT CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`, queue_name VARCHAR(190) CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`, created_at DATETIME NOT NULL, available_at DATETIME NOT NULL, delivered_at DATETIME DEFAULT NULL, INDEX IDX_75EA56E0FB7336F0 (queue_name), INDEX IDX_75EA56E0E3BD61CE (available_at), INDEX IDX_75EA56E016BA31DB (delivered_at), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB COMMENT = \'\' ');
+        $this->addSql('CREATE INDEX user_id ON article (user_id)');
+        $this->addSql('CREATE INDEX categorie_id ON article (categorie_id)');
+        $this->addSql('ALTER TABLE categorie ADD user_id INT NOT NULL, DROP nom_user');
+        $this->addSql('ALTER TABLE categorie ADD CONSTRAINT categorie_ibfk_1 FOREIGN KEY (id) REFERENCES article (categorie_id) ON UPDATE NO ACTION ON DELETE NO ACTION');
+        $this->addSql('ALTER TABLE categorie ADD CONSTRAINT categorie_ibfk_2 FOREIGN KEY (user_id) REFERENCES user (id)');
+        $this->addSql('CREATE INDEX user_id ON categorie (user_id)');
+        $this->addSql('ALTER TABLE commentaire ADD CONSTRAINT commentaire_ibfk_2 FOREIGN KEY (user_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE commentaire ADD CONSTRAINT commentaire_ibfk_1 FOREIGN KEY (article_id) REFERENCES article (id)');
+        $this->addSql('CREATE INDEX user_id ON commentaire (user_id)');
+        $this->addSql('CREATE INDEX article_id ON commentaire (article_id)');
+    }
+}

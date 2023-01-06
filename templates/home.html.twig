@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello{% endblock %}
+
+{% block body %}
+<div class="jumbotron">
+  <h1 class="display-4 d-flex justify-content-center">Hello, world!</h1>
+  <p class="lead d-flex justify-content-center">Bienvenue sur notre Blog, ici vous pouvez partagez vos passions interagir entre vous, mais pour commencer veuillez vous inscrire.</p>
+    <p class="lead d-flex justify-content-center">
+    <a class="btn btn-primary btn-lg" href="{{ path('app_login')}}" role="button">Connexion</a>
+  </p>
+  <p class="lead d-flex justify-content-center">
+    <a class="btn btn-primary btn-lg" href="{{ path('app_register')}}" role="button">Inscription</a>
+  </p>
+</div>
+{% endblock %}
